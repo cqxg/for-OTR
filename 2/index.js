@@ -1,3 +1,32 @@
+const GenerateApp = function () {
+
+    const generate = document.querySelector("#generate");
+    const size = document.querySelector("#size");
+    const color = document.querySelector("#color");
+    const manufacturer = document.querySelector("#manufacturer");
+    const sell_out = document.querySelector("#sell-out");
+    const state = {
+        baseLink: 'http://любой_домен/filter?',
+        currentSize: '',
+        currentColor: '',
+        currentManuf: '',
+        currentSell: ''
+    };
+
+    size.addEventListener('click', event => {
+        state.currentSize = event.target.value;
+        console.log(state.currentSize);
+    });
+
+
+    // color.addEventListener('click', setColor());
+    // manufacturer.addEventListener('click', setmanufacturer());
+    // sell_out.addEventListener('click', setSell());
+}
+
+document.addEventListener("DOMContentLoaded", GenerateApp);
+
+
 // function inputController() {
 
 //     const state = {
