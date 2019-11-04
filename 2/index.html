@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>Task1</title>
+</head>
+
+<body>
+
+    <main id="wrapper">
+
+        <section class="form-sections">
+            <div class="labels">
+                <label id="radio-label" for="radioInput">
+                    Size
+                </label>
+            </div>
+            <div class="input-fields" name="radioInput">
+                <ul style="list-style: none;">
+                    <li class="radio"><label>S<input type="radio" value="S" name="radio-buttons"
+                                class="user-selections"></label></li>
+                    <li class="radio"><label>M<input type="radio" value="M" name="radio-buttons"
+                                class="user-selections"></label></li>
+                    <li class="radio"><label>L<input type="radio" value="L" name="radio-buttons"
+                                class="user-selections"></label></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="form-sections">
+            <div class="labels">
+                <label id="chebox-label" for="checkbox-buttons">Color</label>
+            </div>
+
+            <div class="input-fields">
+                <ul id="checkbox-selections" style="list-style: none;">
+                    <li class="checkbox"><label>1<input name="checkbox-buttons" type="checkbox" value="1"
+                                class="user-selections"></label></li>
+                    <li class="checkbox"><label>2<input name="checkbox-buttons" type="checkbox" value="2"
+                                class="user-selections"></label></li>
+                    <li class="checkbox"><label>3<input name="checkbox-buttons" type="checkbox" value="3"
+                                class="user-selections"></label></li>
+                    <li class="checkbox"><label>4<input name="checkbox-buttons" type="checkbox" value="4"
+                                class="user-selections"></label></li>
+                    <li class="checkbox"><label>5<input name="checkbox-buttons" type="checkbox" value="5"
+                                class="user-selections"></label></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="form-sections">
+            <div class="labels">
+                <label id="dropdown-label">
+                    manufacturer
+                </label>
+            </div>
+
+            <div class="input-fields">
+                <select id="dropdown" class="dropdown">
+                    <option value="aaa">
+                        aaa
+                    </option>
+                    <option value="b&c">
+                        b&c
+                    </option>
+                    <option value="ddd" selected>
+                        ddd
+                    </option>
+                    <option value="eee">
+                        eee
+                    </option>
+                </select>
+            </div>
+        </section>
+
+        <section class="form-sections">
+            <div class="labels">
+                <label id="chebox-label" for="checkbox-buttons">sell-out</label>
+            </div>
+
+            <div class="input-fields">
+                <ul id="checkbox-selections" style="list-style: none;">
+                    <li class="checkbox"><label>1<input name="checkbox-buttons" type="checkbox" value="1"
+                                class="user-selections"></label></li>
+                </ul>
+            </div>
+        </section>
+
+
+
+        <button id="submit" type="submit">Generate</button>
+
+    </main>
+
+</body>
+
+<script src="./index.js"></script>
+
+</html>
