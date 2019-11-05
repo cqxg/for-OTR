@@ -5,6 +5,7 @@ const GenerateApp = function () {
     const color = document.querySelector("#color");
     const manufacturer = document.querySelector("#manufacturer");
     const sell_out = document.querySelector("#sell-out");
+    const link = document.querySelector("#link");
     const state = {
         baseLink: 'http://любой_домен/filter?',
         currentSize: '',
@@ -18,25 +19,22 @@ const GenerateApp = function () {
         let index = state.currentColor.indexOf(event.target.value);
         if (state.currentColor.includes(event.target.value)) {
             state.currentColor.splice(index, 1);
-            console.log(state.currentColor);
         } else {
             state.currentColor.push(event.target.value);
-            console.log(state.currentColor);
         }
 
     });
 
 
-
     size.addEventListener('change', event => {
         state.currentSize = event.target.value;
-        console.log(state.currentSize);
     });
+
 
     manufacturer.addEventListener('change', event => {
         state.currentManuf = event.target.value;
-        console.log(state.currentManuf);
     });
+
 
     sell_out.addEventListener('change', event => {
         if (state.currentSell === 0) {
@@ -44,11 +42,15 @@ const GenerateApp = function () {
         } else {
             state.currentSell = 0
         }
-        console.log(state.currentSell);
     });
 
-}
+    generate.addEventListener('click', event => {
+        const { baseLink, currentSize, currentColor, currentManuf, currentSell } = state;
+
+        link.innerHTML = `${baseLink}size=${currentSize}&color=${currentColor}&manufacturer=${currentManuf}&sell_out=${currentSell}`;
+        console.log(`${baseLink}size=${currentSize}&color=${currentColor}&manufacturer=${currentManuf}&sell_out=${currentSell}`);
+    });
+
+};
 
 document.addEventListener("DOMContentLoaded", GenerateApp);
-
-
