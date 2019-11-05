@@ -8,47 +8,47 @@ const GenerateApp = function () {
     const state = {
         baseLink: 'http://любой_домен/filter?',
         currentSize: '',
-        currentColor: '',
-        currentManuf: '',
-        currentSell: ''
+        currentColor: [],
+        currentManuf: 0,
+        currentSell: 0,
     };
 
-    size.addEventListener('click', event => {
+
+    color.addEventListener('change', event => {
+        let index = state.currentColor.indexOf(event.target.value);
+        if (state.currentColor.includes(event.target.value)) {
+            state.currentColor.splice(index, 1);
+            console.log(state.currentColor);
+        } else {
+            state.currentColor.push(event.target.value);
+            console.log(state.currentColor);
+        }
+
+    });
+
+
+
+    size.addEventListener('change', event => {
         state.currentSize = event.target.value;
         console.log(state.currentSize);
     });
 
+    manufacturer.addEventListener('change', event => {
+        state.currentManuf = event.target.value;
+        console.log(state.currentManuf);
+    });
 
-    // color.addEventListener('click', setColor());
-    // manufacturer.addEventListener('click', setmanufacturer());
-    // sell_out.addEventListener('click', setSell());
+    sell_out.addEventListener('change', event => {
+        if (state.currentSell === 0) {
+            state.currentSell = event.target.value;
+        } else {
+            state.currentSell = 0
+        }
+        console.log(state.currentSell);
+    });
+
 }
 
 document.addEventListener("DOMContentLoaded", GenerateApp);
 
 
-// function inputController() {
-
-//     const state = {
-//         baseLink: 'http://любой_домен/filter?',
-//         size: '',
-//         color: '',
-//         manufacturer: '',
-//         sell_out: ''
-//     };
-
-//     load() {
-//         const { size , color , manufacturer , sell_out } = state;
-//         http://любой_домен/filter?size=M&color=1,2&manufacturer=aaa,eee
-//         fetch(`${baseLink}size=${size}&color=${color}&manufacturer=${manufacturer}&sell_out=${sell_out}`)
-//             .then(res => res.json())
-//             .then(response => {
-//                 this.state.pageToken = response.nextPageToken;
-//                 this.generateStatics(response.items);
-//                 this.secondQuery();
-//             })
-//             .catch(err => console.log(err));
-//     }    
-// }
-
-// document.addEventListener("DOMContentLoaded", inputController);
