@@ -1,22 +1,29 @@
+
 const crossDomainApp = function () {
 
-    const myIframe = document.getElementById('myIframe');
-    const change = document.getElementById('change');
-    const input = document.getElementById('input');
-    const p = document.querySelector('p');
-    const data = document.getElementById('data');
-
-    change.addEventListener('click', e => {
-        data.innerHTML = input.value;
-        p.textContent = 'Данные изменены!!';
-
-        if (input.value != '') {
-            console.log('Данные изменены!!');
-        } else {
-            console.log('Данные удалены!!');
-            p.textContent = '';
-        }
+    change.addEventListener('click', function (e) {
+        let row = table.insertRow();
+        row.insertCell().innerHTML = row.sectionRowIndex;
+        row.insertCell().innerHTML = input.value;
+        row.insertCell().innerHTML = '<input type="button" value="DELETE" class="del"/>';
+        input.value = "";
+        localStorage.setItem("item", document.getElementsByTagName('table')[0].innerHTML);
+        console.log('Данные добавлены !');
     });
 
-}
+    table.addEventListener('click', function (e) {
+        if (e.target.classList.contains('del')) {
+            e.target.parentNode.parentNode.remove();
+            localStorage.setItem("item", document.getElementsByTagName('table')[0].innerHTML);
+            console.log('Данные удалены !');
+        };
+    });
+
+    window.addEventListener("load", function () {
+        if (localStorage.getItem('item'));
+        document.getElementsByTagName('table')[0].innerHTML = localStorage.getItem('item')
+    });
+
+};
+
 document.addEventListener("DOMContentLoaded", crossDomainApp);
