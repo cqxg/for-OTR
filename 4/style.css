@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+h1,
+p,
+input,
+button,
+span {
+    margin-bottom: 10px;
+}
