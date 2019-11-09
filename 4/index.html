@@ -5,28 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <title>Task 4</title>
+    <title>Task 4/5</title>
 </head>
 
 <body>
 
-    <h1>Acces an &lt;1frame&gt; document</h1>
-    <button onclick="changeStuff()">Change</button>
+    <h1>Изменить данные поддомена</h1>
+    <input type="text" value="" id="input">
+    <button id="change">Change</button>
     <hr>
-    <iframe id="myIframe" src="./content.html" frameborder="1"></iframe>
+    <iframe id="myIframe" src="./content.html" frameborder="1" height="200px" width="350px"></iframe>
 
 </body>
 
-<script>
-
-    const myIframe = document.getElementById('myIframe')
-
-    function changeStuff() {
-        const iframeWindow = myIframe.contentWindow;
-        console.log(iframeWindow);
-    }
-
-</script>
+<script src="./index.js"></script>
 
 </html>
