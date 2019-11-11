@@ -1,12 +1,12 @@
-
-const crossDomainApp = function () {
+const crossDomainApp = () => {
     const LOCAL_STORAGE_KEY = 'table';
     const INITIAL_STATE = [];
 
-    const table = document.querySelector('#table');
+    const table = document.querySelector('.table-wrapper');
     const change = document.querySelector('#change');
     const input = document.querySelector('#input');
-    const deleteButton = '<input type="button" value="DELETE" class="del"/>';
+    const row_template = document.querySelector('#row_template');
+    const tableBody = document.querySelector('.divTableBody');
 
     // ---------------------------- Local Storage  ----------------------------------
     const getData = () => JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || INITIAL_STATE;
@@ -15,55 +15,81 @@ const crossDomainApp = function () {
 
     // ---------------------------- Table Manipulation ------------------------------
     const renderTable = (data) => {
+        tableBody.innerHTML = '';
         if (data) {
-            data.forEach(row => addRow(row.value));
+            data.forEach((row, index) => addRow(row, index));
         }
     }
 
-    const addRow = (value) => {
-        const row = table.insertRow();
-        row.setAttribute('id', `${value}_${table.rows.length}`);
+    const addRow = (data, index) => {
+        const { key, value } = data;
 
-        row.insertCell().innerHTML = row.sectionRowIndex;
-        row.insertCell().innerHTML = value;
-        row.insertCell().innerHTML = deleteButton;
+        const fragment = document.createDocumentFragment();
+        const rowFragment = document.importNode(row_template.content, true);    
+
+        const row = rowFragment.querySelector('.divTableRow');
+        row.id = key;
+
+        const keyCell = rowFragment.querySelector('#key');
+        keyCell.innerText = index;
+
+        const valueCell = rowFragment.querySelector('#value');
+        valueCell.innerText = value;
+
+        fragment.appendChild(rowFragment);
+
+        tableBody.appendChild(fragment);
+        
         return row;
-    };
-
-    const deleteRow = (target) => {
-        const row = target.parentNode.parentNode;
-        row.remove();
     }
+
     // ------------------------------------------------------------------------------
 
+
+    // ----------------------------- Helpers ----------------------------------------
     const clearInput = () => {
         input.value = '';
     }
 
-    // ----------------------------- LS Manipulation --------------------------------
-    const addItem = (item) => {
-        const tableData = getData();
-        tableData.push(item);
-        setData(tableData);
-    };
-
-    const removeItem = (item) => {
-        const tableData = getData();
-        const newTableData = tableData.filter((row) => row.key !== item.key);
-        setData(newTableData);
+    const uniqueid = () => {
+        let idstr = String.fromCharCode(Math.floor((Math.random()*25) + 65));
+        do {                
+            const ascicode = Math.floor((Math.random()*42) + 48);
+            if (ascicode < 58 || ascicode > 64){
+                idstr += String.fromCharCode(ascicode);    
+            }                
+        } while (idstr.length < 32);
+    
+        return (idstr);
     }
     // ------------------------------------------------------------------------------
 
-    const changeHadler = () => {
+    // ----------------------------- LS Manipulation --------------------------------
+    const addItem = (value) => {
+        const item = {
+            key: uniqueid(),
+            value,
+        };
+
+        const tableData = getData();
+        tableData.push(item);
+        setData(tableData);
+        renderTable(tableData);
+    };
+
+    const removeItem = (key) => {
+        const tableData = getData();
+        const newTableData = tableData.filter((row) => row.key !== key);
+        setData(newTableData);
+        renderTable(newTableData);
+    }
+    // ------------------------------------------------------------------------------
+
+    // ---------------------------- Handlers ----------------------------------------
+    const addHandler = () => {
         const value = input.value;
 
-        const row = addRow(value);
-
-        const item = {
-            key: row.getAttribute('id'),
-            value: value,
-        }
-        addItem(item);
+        addItem(value);
 
         clearInput();
 
@@ -75,28 +101,22 @@ const crossDomainApp = function () {
         const isDeleteButton = target.classList.contains('del');
 
         if (isDeleteButton) {
-            const row = target.parentNode.parentNode;
-
-            const item = {
-                key: row.getAttribute('id'),
-                value: row.childNodes[1].innerText,
-            }
-            removeItem(item);
-
-            deleteRow(target);
+            const key = target.parentNode.parentNode.id;
+            removeItem(key);
 
             console.log('Данные удалены !');
         };
     };
 
-    const init = () => {
+    const initHandler = () => {
         const tableData = getData();
         renderTable(tableData);
     }
+    // ------------------------------------------------------------------------------
 
-    change.addEventListener('click', changeHadler);
+    change.addEventListener('click', addHandler);
     table.addEventListener('click', deleteHandler);
-    window.addEventListener('load', init);
+    window.addEventListener('load', initHandler);
 };
 
 document.addEventListener('DOMContentLoaded', crossDomainApp);
