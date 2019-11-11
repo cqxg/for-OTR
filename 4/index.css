@@ -1,0 +1,12 @@
+.data-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.output {
+    margin-left: 20px;
+    min-height: 250px; 
+    min-width: 450px;
+    border: 1px solid gray;
+}
