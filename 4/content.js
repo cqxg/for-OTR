@@ -25,7 +25,7 @@ const crossDomainApp = () => {
         const { key, value } = data;
 
         const fragment = document.createDocumentFragment();
-        const rowFragment = document.importNode(row_template.content, true);    
+        const rowFragment = document.importNode(row_template.content, true);
 
         const row = rowFragment.querySelector('.divTableRow');
         row.id = key;
@@ -39,7 +39,7 @@ const crossDomainApp = () => {
         fragment.appendChild(rowFragment);
 
         tableBody.appendChild(fragment);
-        
+
         return row;
     }
 
@@ -52,14 +52,14 @@ const crossDomainApp = () => {
     }
 
     const uniqueid = () => {
-        let idstr = String.fromCharCode(Math.floor((Math.random()*25) + 65));
-        do {                
-            const ascicode = Math.floor((Math.random()*42) + 48);
-            if (ascicode < 58 || ascicode > 64){
-                idstr += String.fromCharCode(ascicode);    
-            }                
+        let idstr = String.fromCharCode(Math.floor((Math.random() * 25) + 65));
+        do {
+            const ascicode = Math.floor((Math.random() * 42) + 48);
+            if (ascicode < 58 || ascicode > 64) {
+                idstr += String.fromCharCode(ascicode);
+            }
         } while (idstr.length < 32);
-    
+
         return (idstr);
     }
     // ------------------------------------------------------------------------------
@@ -113,7 +113,31 @@ const crossDomainApp = () => {
         renderTable(tableData);
     }
     // ------------------------------------------------------------------------------
+    // ------------------------------ Answers & Listen -------------------------------------
 
+    function receiveMessage(e, data) {
+        if (e.origin !== "*")
+            var payload = e.data;
+
+        switch (payload.method) {
+            case 'setData':
+                addItem(payload.value);
+                break;
+            // case 'get':
+            //     var parent = window.parent;
+            //     var data = localStorage.getItem(payload.key);
+            //     parent.postMessage(data, "*");
+            //     break;
+            case 'removeData':
+                removeItem(payload.value)
+                break;
+            case 'getData':
+                    renderTable(data)
+                break;
+        }
+    }
+
+    window.addEventListener("message", receiveMessage);
     change.addEventListener('click', addHandler);
     table.addEventListener('click', deleteHandler);
     window.addEventListener('load', initHandler);

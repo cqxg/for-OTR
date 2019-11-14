@@ -1,12 +1,18 @@
-.data-wrapper {
+body {
+    text-align: center;
+}
+
+.data-wrapper,
+.button-wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+}
+#myIframe {
+    width: 70%;
+    height: 400px;
 }
 
 
-.output {
-    margin-left: 20px;
-    min-height: 250px; 
-    min-width: 450px;
-    border: 1px solid gray;
-}
+

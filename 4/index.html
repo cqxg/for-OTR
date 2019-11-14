@@ -14,13 +14,15 @@
     <h1>Изменить данные поддомена</h1>
     <div class="wrapper">
         <input type="text" value="" id="input">
-        <button id="change">Change</button>
+        <div class="button-wrapper">
+            <button id="change">Изменить данные</button>
+            <button id="remove">Удалить по ключу</button>
+            <button id="get">Получить данные</button>
+            <button id="callback">Вызвать колбэк</button>
+        </div>
         <hr>
         <div class="data-wrapper">
-            <iframe id="myIframe" src="./content.html" frameborder="1" height="250px" width="450px"></iframe>
-            <!-- <div class="output">
-                <button id="get">get</button>
-            </div> -->
+            <iframe id="myIframe" src="./content.html" frameborder="1"></iframe>
         </div>
     </div>
 

@@ -10,36 +10,29 @@
 </head>
 
 <body>
+    <div class="content-wrapper">
+        <p>Данные поддомена</p>
+        <input id="input" type="text" /><br />
+        <button id="change">Change</button>
 
-    <p>Данные поддомена</p>
-    <input id="input" type="text" /><br />
-    <button id="change">Change</button>
-    <div id="wrapper">
-        <table id="table">
-            <tr id="firstLine">
-                <td>№</td>
-                <td>Данные</td>
-                <td>Delete</td>
-            </tr>
-        </table>
-    </div>
-    
-    <div class="table-wrapper">
-        <div class="divTable">
-            <div class="divTableBody">
+        <div class="table-wrapper">
+            <div class="divTable">
+                <div class="divTableBody">
+                </div>
             </div>
         </div>
-    </div>
 
-    <template id="row_template">
-        <div class="divTableRow">
-            <div class="divTableCell" id='key'></div>
-            <div class="divTableCell" id='value'></div>
-            <div class="divTableCell" id='action'>
-                <input type="button" value="DELETE" class="del"/>
+        <template id="row_template">
+            <div class="divTableRow">
+                <div class="divTableCell" id='key'></div>
+                <div class="divTableCell" id='value'></div>
+                <div class="divTableCell" id='action'>
+                    <input type="button" value="DELETE" class="del" />
+                </div>
             </div>
-        </div>
-    </template>
+        </template>
+
+    </div>
 
 </body>
 
