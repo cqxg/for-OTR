@@ -1,4 +1,4 @@
-const GenerateApp = function () {
+const GenerateApp = () => {
 
     const generate = document.querySelector("#generate");
     const size = document.querySelector("#size");
@@ -14,42 +14,47 @@ const GenerateApp = function () {
         currentSell: 0,
     };
 
+    const setSize = () => {
+        state.currentSize = event.target.value;
+    };
 
-    color.addEventListener('change', event => {
+    const setColor = () => {
         let index = state.currentColor.indexOf(event.target.value);
         if (state.currentColor.includes(event.target.value)) {
             state.currentColor.splice(index, 1);
         } else {
             state.currentColor.push(event.target.value);
-        }
+        };
+    };
 
-    });
-
-
-    size.addEventListener('change', event => {
-        state.currentSize = event.target.value;
-    });
-
-
-    manufacturer.addEventListener('change', event => {
+    const setManufacturer = () => {
         state.currentManuf = event.target.value;
-    });
+    };
 
 
-    sell_out.addEventListener('change', event => {
+    const setSell = () => {
         if (state.currentSell === 0) {
             state.currentSell = event.target.value;
         } else {
             state.currentSell = 0
-        }
-    });
+        };
+    };
 
-    generate.addEventListener('click', event => {
+    const generator = () => {
         const { baseLink, currentSize, currentColor, currentManuf, currentSell } = state;
 
-        link.innerHTML = `${baseLink}size=${currentSize}&color=${currentColor}&manufacturer=${currentManuf}&sell_out=${currentSell}`;
-        console.log(`${baseLink}size=${currentSize}&color=${currentColor}&manufacturer=${currentManuf}&sell_out=${currentSell}`);
-    });
+        link.innerHTML = `${baseLink}
+        size=${currentSize}
+        &color=${currentColor}
+        &manufacturer=${currentManuf}
+        &sell_out=${currentSell}`;
+    };
+
+    size.addEventListener('change', setSize);
+    color.addEventListener('change', setColor);
+    sell_out.addEventListener('change', setSell);
+    generate.addEventListener('click', generator);
+    manufacturer.addEventListener('change', setManufacturer);
 
 };
 
