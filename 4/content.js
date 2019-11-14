@@ -113,31 +113,37 @@ const crossDomainApp = () => {
         renderTable(tableData);
     }
     // ------------------------------------------------------------------------------
-    // ------------------------------ Answers & Listen -------------------------------------
+    
+    // ------------------------------ Answers & Listen ------------------------------
+    const callbacks = {
+        'logMessage': (msg) => console.log(msg),
+    };
 
-    function receiveMessage(e, data) {
-        if (e.origin !== "*")
-            var payload = e.data;
+    const receiveMessageTarget = (event) => {
+        const { data, source, origin } = event;
+        const { method, value, callback } = data; 
 
-        switch (payload.method) {
+        switch (method) {
             case 'setData':
-                addItem(payload.value);
+                addItem(value);
                 break;
-            // case 'get':
-            //     var parent = window.parent;
-            //     var data = localStorage.getItem(payload.key);
-            //     parent.postMessage(data, "*");
-            //     break;
             case 'removeData':
-                removeItem(payload.value)
+                removeItem(value)
                 break;
             case 'getData':
-                    renderTable(data)
+                const tableData = getData();
+                source.postMessage(tableData, '*');
+                break;
+            case 'getCall':
+                const message = value;
+                const fn = callbacks[callback];
+                fn(message);
                 break;
         }
     }
+    // ------------------------------------------------------------------------------
 
-    window.addEventListener("message", receiveMessage);
+    window.addEventListener("message", receiveMessageTarget);
     change.addEventListener('click', addHandler);
     table.addEventListener('click', deleteHandler);
     window.addEventListener('load', initHandler);

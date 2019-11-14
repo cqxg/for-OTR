@@ -29,40 +29,24 @@ const crossDomainApp = () => {
         myIframe.contentWindow.postMessage(payloadRead, '*');
     }
 
-    // const goCall = () => {
-    //     const payloadCallback = {
-    //         method: '*',
-    //         callback: () => console.log('hi')
-    //     }
-    //     myIframe.contentWindow.postMessage(payloadCallback, '*');
-    // }
+    const goCall = () => {
+        const payloadCallback = {
+            method: 'getCall',
+            value: 'Hi',
+            callback: 'logMessage'
+        }
+        myIframe.contentWindow.postMessage(payloadCallback, '*');
+    };
+
+    const receiveMessageOrigin = (event) => {
+        console.log('Origin: ', event.data);
+    }
 
     get.addEventListener('click', goGet)
-    // callback.addEventListener('click', goCall)
+    callback.addEventListener('click', goCall)
     change.addEventListener('click', goWrite);
     remove.addEventListener('click', goRemove);
-
-
-    // const payloadRead = {
-    //     method: 'getData',
-    // }
-
-    // const payloadCallback = {
-    //     method: '*',
-    //     callback: () => console.log('hi')
-    // }
-
-    // if (payload.callback) {
-    //     payload.callback();
-    // function receiveMessage(e) {
-    //     if (e.origin !== "*")
-    //         var payload = e.data;
-    //     console.log(payload);
-    // }
-
-    // window.addEventListener("message", receiveMessage);
-    // }
-
+    window.addEventListener("message", receiveMessageOrigin);
 };
 
 document.addEventListener("DOMContentLoaded", crossDomainApp);
