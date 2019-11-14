@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Task 4/5</title>
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <p>Данные поддомена</p>
+        <input id="input" type="text" /><br />
+        <button id="change">Change</button>
+
+        <div class="table-wrapper">
+            <div class="divTable">
+                <div class="divTableBody">
+                </div>
+            </div>
+        </div>
+
+        <template id="row_template">
+            <div class="divTableRow">
+                <div class="divTableCell" id='key'></div>
+                <div class="divTableCell" id='value'></div>
+                <div class="divTableCell" id='action'>
+                    <input type="button" value="DELETE" class="del" />
+                </div>
+            </div>
+        </template>
+
+    </div>
+
+</body>
+
+<script src="./content.js">
+
+</script>
+
+</html>

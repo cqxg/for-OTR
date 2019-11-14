@@ -1,0 +1,18 @@
+body {
+    text-align: center;
+}
+
+.data-wrapper,
+.button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+}
+#myIframe {
+    width: 70%;
+    height: 400px;
+}
+
+
+
